@@ -1,0 +1,59 @@
+# Production Environment Variables for Render
+
+# ================================
+# BACKEND ENVIRONMENT VARIABLES
+# ================================
+# Copy these to your Render backend service environment variables
+
+SECRET_KEY=your-auto-generated-secret-key-here
+DEBUG=False
+ALLOWED_HOSTS=.onrender.com,campus-connect-backend.onrender.com
+DATABASE_URL=postgresql://username:password@hostname:port/database
+CORS_ALLOWED_ORIGINS=https://campus-connect-frontend.onrender.com
+DJANGO_SETTINGS_MODULE=backend.settings
+
+# JWT Configuration
+JWT_ACCESS_TOKEN_LIFETIME_MINUTES=60
+JWT_REFRESH_TOKEN_LIFETIME_DAYS=7
+JWT_SECRET_KEY=your-jwt-secret-key
+
+# Email Configuration (Optional)
+EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_HOST_USER=your-email@gmail.com
+EMAIL_HOST_PASSWORD=your-app-password
+EMAIL_USE_TLS=True
+DEFAULT_FROM_EMAIL=noreply@campusconnect.com
+
+# Google OAuth (Optional)
+GOOGLE_OAUTH_CLIENT_ID=your-google-client-id
+GOOGLE_OAUTH_CLIENT_SECRET=your-google-client-secret
+
+# ================================
+# FRONTEND ENVIRONMENT VARIABLES  
+# ================================
+# Copy these to your Render frontend static site environment variables
+
+REACT_APP_API_URL=https://campus-connect-backend.onrender.com/api
+REACT_APP_APP_NAME=Campus Connect
+REACT_APP_VERSION=1.0.0
+REACT_APP_ENABLE_DARK_MODE=true
+REACT_APP_ENABLE_NOTIFICATIONS=true
+GENERATE_SOURCEMAP=false
+
+# Google OAuth (Optional)
+REACT_APP_GOOGLE_CLIENT_ID=your-google-client-id
+REACT_APP_GOOGLE_API_KEY=your-google-api-key
+
+# ================================
+# DATABASE CONFIGURATION
+# ================================
+# Your PostgreSQL database will be created with:
+# - Name: campus-connect-db
+# - Database: campus_connect  
+# - User: campus_connect_user
+# - Plan: Free (1GB storage, 1 month retention)
+
+# The DATABASE_URL will be automatically provided by Render
+# Format: postgresql://username:password@hostname:port/database

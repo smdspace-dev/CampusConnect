@@ -1,4 +1,4 @@
-# College Management System
+# CampussConnect
 
 A full-stack College Management System with Django REST backend and React frontend.
 
@@ -222,6 +222,4 @@ REACT_APP_GOOGLE_API_KEY=your-google-api-key
 2. Fork the repository, create a branch per feature/fix.
 3. Open a PR describing changes and tests.
 
-## License
-
-Replace with your chosen license, e.g., MIT.
+## License - MIT.

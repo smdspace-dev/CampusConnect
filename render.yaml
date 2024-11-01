@@ -1,0 +1,55 @@
+# Campus Connect - Render Deployment Configuration
+services:
+  # Django Backend Service
+  - type: web
+    name: campus-connect-backend
+    runtime: python
+    buildCommand: |
+      cd backend &&
+      pip install --upgrade pip &&
+      pip install -r requirements.txt &&
+      python manage.py collectstatic --noinput
+    startCommand: |
+      cd backend &&
+      python manage.py migrate &&
+      gunicorn backend.wsgi:application --bind 0.0.0.0:$PORT
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: campus-connect-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: ".onrender.com"
+      - key: CORS_ALLOWED_ORIGINS
+        value: "https://campus-connect-frontend.onrender.com"
+      - key: DJANGO_SETTINGS_MODULE
+        value: "backend.settings"
+    healthCheckPath: /api/health/
+    plan: free
+
+  # React Frontend Service  
+  - type: static
+    name: campus-connect-frontend
+    buildCommand: |
+      cd frontend &&
+      npm ci &&
+      npm run build
+    staticPublishPath: ./frontend/build
+    envVars:
+      - key: REACT_APP_API_URL
+        value: "https://campus-connect-backend.onrender.com/api"
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+
+# PostgreSQL Database
+databases:
+  - name: campus-connect-db
+    databaseName: campus_connect
+    user: campus_connect_user
+    plan: free

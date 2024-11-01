@@ -4,6 +4,7 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from . import auth_views
+from .health import health_check
 
 schema_view = get_schema_view(
    openapi.Info(
@@ -17,6 +18,8 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # Health check for Render
+    path('api/health/', health_check, name='health_check'),
     # Authentication endpoints
     path('api/auth/login/', auth_views.login_view, name='login'),
     path('api/auth/logout/', auth_views.logout_view, name='logout'),
