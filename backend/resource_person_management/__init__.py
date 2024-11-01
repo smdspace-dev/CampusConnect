@@ -1,0 +1,1 @@
+default_app_config = 'resource_person_management.apps.ResourcePersonManagementConfig'
