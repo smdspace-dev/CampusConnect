@@ -11,6 +11,7 @@ build/
 dist/
 */build/
 */dist/
+RENDER_DEPLOYMENT_GUIDE.md
 
 # Environment variables
 .env
@@ -44,6 +45,7 @@ db.sqlite3-journal
 media/
 staticfiles/
 static/
+render-env-template.txt
 
 # IDE and Editor files
 .vscode/
